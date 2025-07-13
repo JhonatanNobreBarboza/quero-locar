@@ -1,0 +1,134 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Color variables */
+  --color-primary: #1976D2;
+  --color-primary-light: #42A5F5;
+  --color-primary-dark: #0D47A1;
+  
+  --color-secondary: #F57C00;
+  --color-secondary-light: #FFB74D;
+  --color-secondary-dark: #E65100;
+  
+  --color-success: #4CAF50;
+  --color-info: #2196F3;
+  --color-warning: #FF9800;
+  --color-error: #F44336;
+  
+  --color-text: #1D2939;
+  --color-text-light: #667085;
+  --color-border: #E0E0E0;
+  --color-background: #F5F5F7;
+  
+  /* Shadow variables */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.08);
+  
+  /* Size variables */
+  --header-height: 70px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+/* Utility classes */
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-success {
+  color: var(--color-success);
+}
+
+.text-warning {
+  color: var(--color-warning);
+}
+
+.text-error {
+  color: var(--color-error);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-success {
+  background-color: var(--color-success);
+}
+
+.bg-warning {
+  background-color: var(--color-warning);
+}
+
+.bg-error {
+  background-color: var(--color-error);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Equipment marker styles for map */
+.equipment-marker {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+
+.equipment-marker.status-disponível {
+  border: 3px solid var(--color-success);
+}
+
+.equipment-marker.status-em-uso {
+  border: 3px solid var(--color-info);
+}
+
+.equipment-marker.status-manutenção {
+  border: 3px solid var(--color-warning);
+}
+
+.equipment-marker i {
+  font-size: 16px;
+  color: var(--color-primary-dark);
+}
+
+/* Responsive font sizes */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.2rem;
+  }
+}
