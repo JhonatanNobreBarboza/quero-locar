@@ -22,8 +22,15 @@
         v-else
         class="login-form"
         @submit.prevent="handleLogin"
+        autocomplete="off"
+        novalidate
+        role="presentation"
       >
         <h2>Login</h2>
+        
+        <!-- Fake inputs to confuse autofill -->
+        <input type="text" style="display:none" autocomplete="username">
+        <input type="password" style="display:none" autocomplete="current-password">
         
         <div class="form-group">
           <label for="email">E-mail</label>
@@ -35,7 +42,10 @@
               type="email"
               placeholder="Digite seu e-mail"
               required
-              autocomplete="off"
+              autocomplete="new-password"
+              data-lpignore="true"
+              readonly
+              @focus="$event.target.removeAttribute('readonly')"
             >
           </div>
         </div>
@@ -51,6 +61,9 @@
               placeholder="Digite sua senha"
               required
               autocomplete="new-password"
+              data-lpignore="true"
+              readonly
+              @focus="$event.target.removeAttribute('readonly')"
             >
             <button
               type="button"
@@ -163,7 +176,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../../stores/auth'
 
@@ -236,6 +249,17 @@ export default {
       // This would navigate to registration page
       alert('Recurso de registro será implementado em breve.')
     }
+    
+    // Anti-autofill techniques
+    onMounted(() => {
+      // Change input names dynamically to prevent autofill
+      setTimeout(() => {
+        const emailInput = document.querySelector('#email')
+        const passwordInput = document.querySelector('#password')
+        if (emailInput) emailInput.name = 'email_' + Math.random().toString(36).substr(2, 9)
+        if (passwordInput) passwordInput.name = 'pwd_' + Math.random().toString(36).substr(2, 9)
+      }, 100)
+    })
     
     return {
       email,
