@@ -35,7 +35,7 @@
               type="email"
               placeholder="Digite seu e-mail"
               required
-              autocomplete="username"
+              autocomplete="off"
             >
           </div>
         </div>
@@ -50,7 +50,7 @@
               :type="showPassword ? 'text' : 'password'"
               placeholder="Digite sua senha"
               required
-              autocomplete="current-password"
+              autocomplete="new-password"
             >
             <button
               type="button"
