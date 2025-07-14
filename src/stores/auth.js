@@ -28,10 +28,12 @@ export const useAuthStore = defineStore('auth', () => {
       
       // Check if we have a valid token
       const token = apiClient.getAuthToken()
-      if (token) {
-        // Validate token by trying to get user profile
-        getCurrentUser()
+      if (!token) {
+        // Se não há token, garantir que está limpo
+        user.value = null
+        isAuthenticated.value = false
       }
+      // NÃO chamar getCurrentUser() automaticamente para evitar auto-login
       
       // Only load notifications, not user authentication
       const storedNotifications = localStorage.getItem('quero-locar-notifications')
