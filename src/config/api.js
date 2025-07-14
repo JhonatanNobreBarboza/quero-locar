@@ -1,5 +1,5 @@
 // API Configuration
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'quero-locar-backend-production.up.railway.app/api';
 
 // Create API client with default configuration
 class ApiClient {
