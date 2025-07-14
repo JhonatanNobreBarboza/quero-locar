@@ -1,7 +1,6 @@
 // API Configuration
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://quero-locar-backend-production.up.railway.app/api';
 
-
 // Create API client with default configuration
 class ApiClient {
   constructor() {
