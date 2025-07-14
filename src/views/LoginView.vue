@@ -13,7 +13,7 @@
           <input
             v-model="email"
             type="email"
-            placeholder="admin@querolocar.com"
+            placeholder="seu_email@email.com"
             required
           >
         </div>
@@ -23,7 +23,7 @@
           <input
             v-model="password"
             type="password"
-            placeholder="••••••••"
+            placeholder="******"
             required
           >
         </div>
