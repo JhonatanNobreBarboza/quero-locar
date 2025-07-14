@@ -22,7 +22,6 @@
         v-else
         class="login-form"
         @submit.prevent="handleLogin"
-        autocomplete="off"
         novalidate
         role="presentation"
       >
