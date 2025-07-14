@@ -107,43 +107,7 @@
           Entrar <i class="fas fa-arrow-right" />
         </button>
         
-        <div class="or-divider">
-          <span>ou</span>
-        </div>
-        
-        <div class="demo-login">
-          <p>Para demonstração, escolha um perfil:</p>
-          <div class="demo-roles">
-            <button 
-              type="button" 
-              class="demo-role-button" 
-              @click="loginAsDemo('admin')"
-            >
-              <i class="fas fa-user-cog" /> Admin
-            </button>
-            <button 
-              type="button" 
-              class="demo-role-button" 
-              @click="loginAsDemo('gerente')"
-            >
-              <i class="fas fa-user-tie" /> Gerente
-            </button>
-            <button 
-              type="button" 
-              class="demo-role-button" 
-              @click="loginAsDemo('operador')"
-            >
-              <i class="fas fa-user-hard-hat" /> Operador
-            </button>
-            <button 
-              type="button" 
-              class="demo-role-button" 
-              @click="loginAsDemo('cliente')"
-            >
-              <i class="fas fa-user" /> Cliente
-            </button>
-          </div>
-        </div>
+
       </form>
       
       <div class="register-link">
@@ -213,32 +177,7 @@ export default {
       }
     }
     
-    async function loginAsDemo(role) {
-      isLoading.value = true
-      error.value = ''
-      
-      try {
-        // Use predefined demo credentials based on role
-        const demoUsers = {
-          admin: { email: 'admin@querolocar.com', password: 'admin123' },
-          gerente: { email: 'gerente@querolocar.com', password: 'gerente123' },
-          operador: { email: 'operador@querolocar.com', password: 'operador123' },
-          cliente: { email: 'cliente@querolocar.com', password: 'cliente123' }
-        }
-        
-        const user = demoUsers[role]
-        email.value = user.email
-        password.value = user.password
-        
-        await authStore.loginWithRole(role, user.email)
-        router.push('/dashboard')
-      } catch (err) {
-        console.error('Demo login error:', err)
-        error.value = 'Falha ao fazer login de demonstração.'
-      } finally {
-        isLoading.value = false
-      }
-    }
+
     
     function handleForgotPassword() {
       // This would be implemented with a password reset flow
@@ -269,7 +208,6 @@ export default {
       isLoading,
       error,
       handleLogin,
-      loginAsDemo,
       handleForgotPassword,
       handleRegisterClick
     }
@@ -466,42 +404,7 @@ input[type="checkbox"] {
   font-size: 14px;
 }
 
-.demo-login {
-  margin-bottom: 16px;
-}
 
-.demo-login p {
-  font-size: 14px;
-  text-align: center;
-  margin-bottom: 12px;
-  color: var(--color-text-light);
-}
-
-.demo-roles {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-}
-
-.demo-role-button {
-  padding: 10px;
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  background-color: white;
-  color: var(--color-text);
-  font-size: 14px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.3s ease;
-}
-
-.demo-role-button:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-}
 
 .register-link {
   margin-top: 24px;
@@ -590,15 +493,6 @@ input[type="checkbox"] {
 @media (max-width: 576px) {
   .login-form-container {
     padding: 20px;
-  }
-  
-  .demo-roles {
-    flex-direction: column;
-  }
-  
-  .demo-role-button {
-    width: 100%;
-    justify-content: center;
   }
 }
 </style>
