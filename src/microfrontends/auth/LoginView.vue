@@ -42,7 +42,6 @@
               type="email"
               placeholder="Digite seu e-mail"
               required
-              autocomplete="new-password"
               data-lpignore="true"
               readonly
               @focus="$event.target.removeAttribute('readonly')"
@@ -60,7 +59,6 @@
               :type="showPassword ? 'text' : 'password'"
               placeholder="Digite sua senha"
               required
-              autocomplete="new-password"
               data-lpignore="true"
               readonly
               @focus="$event.target.removeAttribute('readonly')"
