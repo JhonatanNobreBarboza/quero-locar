@@ -1,7 +1,6 @@
-// API Configuration
+// src/config/api.js
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://quero-locar-backend-production.up.railway.app/api';
 
-// Create API client with default configuration
 class ApiClient {
   constructor() {
     this.baseURL = API_BASE_URL;
@@ -10,12 +9,10 @@ class ApiClient {
     };
   }
 
-  // Get auth token from localStorage
   getAuthToken() {
     return localStorage.getItem('quero-locar-token');
   }
 
-  // Set auth token
   setAuthToken(token) {
     if (token) {
       localStorage.setItem('quero-locar-token', token);
@@ -24,25 +21,23 @@ class ApiClient {
     }
   }
 
-  // Get headers with auth token
-  getHeaders(includeAuth = true) {
+  getHeaders(endpoint, includeAuth = true) {
     const headers = { ...this.defaultHeaders };
-    
-    if (includeAuth) {
+
+    if (includeAuth && !endpoint.includes('/auth/login')) {
       const token = this.getAuthToken();
       if (token) {
         headers.Authorization = `Bearer ${token}`;
       }
     }
-    
+
     return headers;
   }
 
-  // Generic request method
   async request(endpoint, options = {}) {
     const url = `${this.baseURL}${endpoint}`;
     const config = {
-      headers: this.getHeaders(options.auth !== false),
+      headers: this.getHeaders(endpoint, options.auth !== false),
       ...options
     };
 
@@ -61,12 +56,11 @@ class ApiClient {
     }
   }
 
-  // HTTP Methods
-  async get(endpoint, options = {}) {
+  get(endpoint, options = {}) {
     return this.request(endpoint, { method: 'GET', ...options });
   }
 
-  async post(endpoint, data, options = {}) {
+  post(endpoint, data, options = {}) {
     return this.request(endpoint, {
       method: 'POST',
       body: JSON.stringify(data),
@@ -74,7 +68,7 @@ class ApiClient {
     });
   }
 
-  async put(endpoint, data, options = {}) {
+  put(endpoint, data, options = {}) {
     return this.request(endpoint, {
       method: 'PUT',
       body: JSON.stringify(data),
@@ -82,12 +76,10 @@ class ApiClient {
     });
   }
 
-  async delete(endpoint, options = {}) {
+  delete(endpoint, options = {}) {
     return this.request(endpoint, { method: 'DELETE', ...options });
   }
 }
 
-// Create singleton instance
 const apiClient = new ApiClient();
-
 export default apiClient;
