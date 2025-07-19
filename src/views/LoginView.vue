@@ -57,7 +57,7 @@ export default {
         password: this.password
       }
 
-      console.log('🧪 Enviando login com:', payload)
+      console.log('📤 Enviando login com:', payload)
 
       try {
         const authStore = useAuthStore()
@@ -67,7 +67,7 @@ export default {
         router.push('/dashboard')
       } catch (error) {
         console.error('❌ Erro no login:', error)
-        this.errorMessage = 'Credenciais inválidas. Verifique seu e-mail e senha.'
+        this.errorMessage = 'Credenciais inválidas. Verifique e tente novamente.'
       }
     }
   }
