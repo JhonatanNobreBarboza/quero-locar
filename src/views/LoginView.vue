@@ -3,37 +3,35 @@
     <div class="login-card">
       <h1>🔐 Quero Locar</h1>
       <h2>Login do Sistema</h2>
-      
-      <form
-        class="login-form"
-        @submit.prevent="handleLogin"
-      >
+
+      <form class="login-form" @submit.prevent="handleLogin">
         <div class="form-group">
           <label>E-mail:</label>
           <input
             v-model="email"
             type="email"
             placeholder="seu_email@email.com"
+            autocomplete="username"
             required
-          >
+          />
         </div>
-        
+
         <div class="form-group">
           <label>Senha:</label>
           <input
             v-model="password"
             type="password"
             placeholder="******"
+            autocomplete="current-password"
             required
-          >
+          />
         </div>
-        
-        <button
-          type="submit"
-          class="btn-login"
-        >
+
+        <button type="submit" class="btn-login">
           Entrar no Sistema
         </button>
+
+        <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
       </form>
     </div>
   </div>
@@ -41,30 +39,35 @@
 
 <script>
 import { useAuthStore } from '../stores/auth'
-import { useRouter } from 'vue-router' 
+import { useRouter } from 'vue-router'
 
 export default {
   name: 'LoginView',
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      errorMessage: ''
     }
   },
   methods: {
     async handleLogin() {
+      const payload = {
+        email: this.email.trim().toLowerCase(),
+        password: this.password
+      }
+
+      console.log('🧪 Enviando login com:', payload)
+
       try {
         const authStore = useAuthStore()
         const router = useRouter()
-        
-        await authStore.login({
-          email: this.email,
-          password: this.password
-        })
-        
+
+        await authStore.login(payload)
         router.push('/dashboard')
       } catch (error) {
-        console.error('Login error:', error)
+        console.error('❌ Erro no login:', error)
+        this.errorMessage = 'Credenciais inválidas. Verifique seu e-mail e senha.'
       }
     }
   }
@@ -143,5 +146,11 @@ export default {
 
 .btn-login:hover {
   background: #1565C0;
+}
+
+.error {
+  color: red;
+  margin-top: 1rem;
+  text-align: center;
 }
 </style>
