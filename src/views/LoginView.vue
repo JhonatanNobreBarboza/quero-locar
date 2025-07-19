@@ -76,7 +76,8 @@ export default {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #f9f9f9;
+  background: linear-gradient(to bottom right, #1976d2, #1565c0);
+  color: white;
 }
 .login-card {
   background: white;
