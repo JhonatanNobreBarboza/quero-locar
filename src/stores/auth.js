@@ -28,10 +28,12 @@ export const useAuthStore = defineStore('auth', () => {
       
       // Check if we have a valid token
       const token = apiClient.getAuthToken()
-      if (token) {
-        // Validate token by trying to get user profile
-        getCurrentUser()
+      if (!token) {
+        // Se não há token, garantir que está limpo
+        user.value = null
+        isAuthenticated.value = false
       }
+      // NÃO chamar getCurrentUser() automaticamente para evitar auto-login
       
       // Only load notifications, not user authentication
       const storedNotifications = localStorage.getItem('quero-locar-notifications')
@@ -66,10 +68,21 @@ export const useAuthStore = defineStore('auth', () => {
       isLoading.value = true
       error.value = null
       
+      console.log('🔍 Frontend - Enviando login request...')
+      console.log('📧 Credentials:', { email: credentials.email, password: '***' })
+      
       const response = await apiClient.post('/auth/login', credentials)
+      
+      console.log('🔍 Frontend - Response received:', response)
+      console.log('🔍 Frontend - Response.success:', response.success)
+      console.log('🔍 Frontend - Response.data:', response.data)
       
       if (response.success) {
         const { user: userData, token } = response.data
+        
+        console.log('✅ Frontend - Login success!')
+        console.log('👤 Frontend - User data:', userData)
+        console.log('🎫 Frontend - Token received:', token ? 'YES' : 'NO')
         
         // Save token
         apiClient.setAuthToken(token)

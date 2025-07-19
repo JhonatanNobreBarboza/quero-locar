@@ -144,71 +144,6 @@ export const useServicesStore = defineStore('services', () => {
     }
   }
 
-  // Generate mock data for demonstration (fallback)
-  function generateMockData() {
-    const mockEquipments = [
-      {
-        id: 1,
-        name: 'Escavadeira Hidráulica CAT 320D',
-        category: 'Escavadeiras',
-        subcategory: 'Hidráulica',
-        brand: 'Caterpillar',
-        model: '320D',
-        year: 2020,
-        status: 'available',
-        condition: 'excellent',
-        dailyRate: 850.00,
-        weeklyRate: 5500.00,
-        monthlyRate: 20000.00,
-        description: 'Escavadeira hidráulica de grande porte, ideal para obras de terraplanagem e construção.',
-        location: {
-          address: 'São Paulo, SP',
-          latitude: -23.5505,
-          longitude: -46.6333
-        },
-        images: ['/assets/images/escavadeira-cat.jpg'],
-        owner: {
-          id: 2,
-          name: 'João Silva',
-          company: 'Equipamentos Silva Ltda',
-          phone: '(11) 98765-4321'
-        }
-      },
-      {
-        id: 2,
-        name: 'Betoneira 400L Vonder',
-        category: 'Betoneiras',
-        subcategory: 'Portátil',
-        brand: 'Vonder',
-        model: 'BMC400',
-        year: 2021,
-        status: 'available',
-        condition: 'good',
-        dailyRate: 120.00,
-        weeklyRate: 750.00,
-        monthlyRate: 2800.00,
-        description: 'Betoneira portátil de 400 litros, ideal para pequenas obras.',
-        location: {
-          address: 'Rio de Janeiro, RJ',
-          latitude: -22.9068,
-          longitude: -43.1729
-        },
-        images: ['/assets/images/betoneira-vonder.jpg'],
-        owner: {
-          id: 3,
-          name: 'Maria Santos',
-          company: 'Locações Santos',
-          phone: '(21) 91234-5678'
-        }
-      }
-    ]
-
-    equipments.value = mockEquipments
-    categories.value = ['Escavadeiras', 'Betoneiras', 'Guindastes', 'Tratores', 'Compactadores']
-    
-    return mockEquipments
-  }
-
   return {
     equipments,
     categories,
@@ -220,7 +155,6 @@ export const useServicesStore = defineStore('services', () => {
     createEquipment,
     updateEquipment,
     deleteEquipment,
-    fetchCategories,
-    generateMockData
+    fetchCategories
   }
 });
