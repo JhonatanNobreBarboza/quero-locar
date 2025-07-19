@@ -3,35 +3,37 @@
     <div class="login-card">
       <h1>🔐 Quero Locar</h1>
       <h2>Login do Sistema</h2>
-
-      <form class="login-form" @submit.prevent="handleLogin">
+      
+      <form
+        class="login-form"
+        @submit.prevent="handleLogin"
+      >
         <div class="form-group">
           <label>E-mail:</label>
           <input
             v-model="email"
             type="email"
             placeholder="seu_email@email.com"
-            autocomplete="username"
             required
-          />
+          >
         </div>
-
+        
         <div class="form-group">
           <label>Senha:</label>
           <input
             v-model="password"
             type="password"
             placeholder="******"
-            autocomplete="current-password"
             required
-          />
+          >
         </div>
-
-        <button type="submit" class="btn-login">
+        
+        <button
+          type="submit"
+          class="btn-login"
+        >
           Entrar no Sistema
         </button>
-
-        <p v-if="error" class="login-error">{{ error }}</p>
       </form>
     </div>
   </div>
@@ -39,31 +41,30 @@
 
 <script>
 import { useAuthStore } from '../stores/auth'
-import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router' 
 
 export default {
   name: 'LoginView',
   data() {
     return {
       email: '',
-      password: '',
-      error: ''
+      password: ''
     }
-  },
-  setup() {
-    const authStore = useAuthStore()
-    const router = useRouter()
-    return { authStore, router }
   },
   methods: {
     async handleLogin() {
-      const email = this.email.trim().toLowerCase()
       try {
-        await this.authStore.login({ email, password: this.password })
-        this.router.push('/dashboard')
-      } catch (err) {
-        console.error('Erro ao fazer login:', err)
-        this.error = 'Credenciais inválidas. Verifique e tente novamente.'
+        const authStore = useAuthStore()
+        const router = useRouter()
+        
+        await authStore.login({
+          email: this.email,
+          password: this.password
+        })
+        
+        router.push('/dashboard')
+      } catch (error) {
+        console.error('Login error:', error)
       }
     }
   }
@@ -72,46 +73,75 @@ export default {
 
 <style scoped>
 .login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
-  background: linear-gradient(to bottom right, #1976d2, #1565c0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1976D2 0%, #42A5F5 100%);
 }
+
 .login-card {
   background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  width: 100%;
+  padding: 48px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   max-width: 400px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-.login-form {
-  display: flex;
-  flex-direction: column;
-}
-.form-group {
-  margin-bottom: 1rem;
-}
-input {
-  padding: 0.75rem;
   width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 4px;
 }
+
+.login-card h1 {
+  color: #1976D2;
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.login-card h2 {
+  color: #666;
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #1976D2;
+}
+
 .btn-login {
-  padding: 0.75rem;
-  background: #1976d2;
+  width: 100%;
+  background: #1976D2;
   color: white;
   border: none;
-  border-radius: 4px;
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
+  transition: background 0.2s;
 }
+
 .btn-login:hover {
-  background: #135ba1;
-}
-.login-error {
-  margin-top: 1rem;
-  color: red;
+  background: #1565C0;
 }
 </style>
