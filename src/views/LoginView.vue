@@ -77,7 +77,6 @@ export default {
   align-items: center;
   min-height: 100vh;
   background: linear-gradient(to bottom right, #1976d2, #1565c0);
-  color: white;
 }
 .login-card {
   background: white;
